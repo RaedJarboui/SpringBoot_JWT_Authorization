@@ -2,7 +2,7 @@
  * Copyright (C) TALYS ™ - All Rights Reserved Unauthorized copying of this file, via any medium is
  * strictly prohibited Proprietary and confidential
  */
-package com.jt.auth.security;
+package com.jwt.auth.security;
 
 import java.util.Set;
 

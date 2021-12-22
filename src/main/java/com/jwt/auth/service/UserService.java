@@ -28,20 +28,14 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	@Autowired
-	PasswordEncoder passwordencoder;
+	PasswordEncoder passwordEncoder;
 
 	public User saveUser(User user) {
 
-		user.setPassword(passwordencoder.encode(user.getPassword()));
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setRole(Role.User);
 		user.setCreateTime(LocalDate.now());
 		return userRepository.save(user);
-	}
-
-	public User findByEmail(String email) {
-
-		return userRepository.findByEmail(email);
-
 	}
 
 	public User findByUsername(String username) {

@@ -19,7 +19,6 @@ import com.jwt.auth.models.User;
  * @since 0.1.0
  */
 public interface UserRepository extends JpaRepository<User, Long> {
-	User findByEmail(String email);
 
 	User findByUsername(String username);
 

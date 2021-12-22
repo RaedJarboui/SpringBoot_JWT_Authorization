@@ -30,11 +30,11 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "email", unique = true, nullable = false)
-	private String email;
+	@Column(name = "name")
+	private String name;
 	@Column(name = "password")
 	private String password;
-	@Column(name = "username")
+	@Column(name = "username", unique = true, nullable = false)
 	private String username;
 	@Column(name = "created_at")
 	private LocalDate createTime;
