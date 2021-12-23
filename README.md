@@ -8,3 +8,5 @@ Also, we will go on with the role based application. So we will use different ro
 
 But admin role will have some specific operations like to list all users. Then we will provide different authorizations to these users according to the role.
 =>JWT Authorization and Authentication, Java (JDK11), Json Web Token, Access Token vs refresh Token, MySQL,Angular 9
+
+frontend source code -> https://github.com/RaedJarboui/Angular_JWT_Authorization
