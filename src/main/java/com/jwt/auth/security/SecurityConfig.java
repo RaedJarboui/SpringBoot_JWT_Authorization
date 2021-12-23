@@ -20,6 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.jwt.auth.models.Role;
 import com.jwt.auth.security.jwt.JwtAuthorizationFilter;
 
 /**
@@ -33,23 +34,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private CustomUserDetailsService customUserDetailsService;
 
-	// @Override
+	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
 		auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
 	}
 
-	// @Override
+	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.cors();// cross-origin-resource-sharing
+		http.cors();
 		http.csrf().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-		http.authorizeRequests().antMatchers("/api/authentication/**").permitAll()// login and
-																					// register
-																					// pre-path
-				.anyRequest().authenticated();
+		http.authorizeRequests().antMatchers("/api/authentication/**").permitAll()
+				.antMatchers("/api/admin/**").hasRole(Role.Admin.name()).anyRequest()
+				.authenticated();
 
 		http.addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new JwtAuthorizationFilter();
 	}
 
-	// @Override
+	@Override
 	@Bean(BeanIds.AUTHENTICATION_MANAGER)
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 
@@ -78,7 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public WebMvcConfigurer corsConfigurer() {
 
 		return new WebMvcConfigurer() {
-			// @Override
+			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 
 				registry.addMapping("/**").allowedOrigins("*").allowedMethods("*");

@@ -4,6 +4,8 @@
  */
 package com.jwt.auth.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,10 +22,12 @@ import com.jwt.auth.models.User;
  */
 public interface UserRepository extends JpaRepository<User, Long> {
 
-	User findByUsername(String username);
+	// findBy+fieldName
+
+	Optional<User> findByUsername(String username);
 
 	@Modifying
-	@Query("Update User u set u.role = :role where u.username = :username  ")
-	void updateUser(@Param("username") String username, @Param("role") Role role);
+	@Query("update User set role = :role where username = :username")
+	void updateUserRole(@Param("username") String username, @Param("role") Role role);
 
 }

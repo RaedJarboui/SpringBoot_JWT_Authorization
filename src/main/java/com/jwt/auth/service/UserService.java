@@ -6,6 +6,7 @@ package com.jwt.auth.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -35,22 +36,22 @@ public class UserService {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setRole(Role.User);
 		user.setCreateTime(LocalDate.now());
+
 		return userRepository.save(user);
 	}
 
-	public User findByUsername(String username) {
+	public Optional<User> findByUsername(String username) {
 
 		return userRepository.findByUsername(username);
-
 	}
 
-	@Transactional
-	public void UpdateUser(String username, Role role) {
+	@Transactional // Transactional is required when executing an update/delete query.
+	public void changeRole(Role newRole, String username) {
 
-		userRepository.updateUser(username, role);
+		userRepository.updateUserRole(username, newRole);
 	}
 
-	public List<User> finAllUsers() {
+	public List<User> findAllUsers() {
 
 		return userRepository.findAll();
 	}

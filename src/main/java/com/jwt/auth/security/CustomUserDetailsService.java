@@ -26,24 +26,18 @@ import com.jwt.auth.utils.SecurityUtils;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 	@Autowired
-	UserService userService;
+	private UserService userService;
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(java.lang
-	 * .String)
-	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		User user = userService.findByUsername(username);
+		User user = userService.findByUsername(username).orElseThrow(
+				() -> new UsernameNotFoundException("User not found with username: " + username));
+
 		Set<GrantedAuthority> authorities =
 				Set.of(SecurityUtils.convertToAuthority(user.getRole().name()));
 
-		// TODO Auto-generated method stub
 		return UserPrincipal.builder().user(user).id(user.getId()).username(user.getUsername())
-				.password(user.getPassword()).build();
+				.password(user.getPassword()).authorities(authorities).build();
 	}
-
 }

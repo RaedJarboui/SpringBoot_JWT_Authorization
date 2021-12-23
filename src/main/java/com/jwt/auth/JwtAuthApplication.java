@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan({"com.jwt.auth.utils", "com.jwt.auth.service", "com.jwt.auth.security.jwt",
-		"com.jwt.auth.security"})
+		"com.jwt.auth.security,com.jwt.auth.controller"})
 @EntityScan("com.jwt.auth.models")
 @EnableJpaRepositories("com.jwt.auth.repository")
 public class JwtAuthApplication {
