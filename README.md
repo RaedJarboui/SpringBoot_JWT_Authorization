@@ -7,7 +7,7 @@ the project contains also CRUD operations will be for users. We will use users f
 Also, we will go on with the role based application. So we will use different roles like “Admin”, “User”. User role will have typical operations like login, register.
 
 But admin role will have some specific operations like to list all users. Then we will provide different authorizations to these users according to the role.
-=>JWT Authorization and Authentication, Java (JDK11), Json Web Token, Access Token vs refresh Token, MySQL,Angular 9
+=>JWT Authorization and Authentication, Java (JDK11), Json Web Token, Access Token and refresh Token, MySQL,Angular 9
 
 frontend source code -> https://github.com/RaedJarboui/Angular_JWT_Authorization
 
