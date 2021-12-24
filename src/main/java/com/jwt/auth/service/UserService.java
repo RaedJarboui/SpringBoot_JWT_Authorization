@@ -55,4 +55,9 @@ public class UserService {
 
 		return userRepository.findAll();
 	}
+
+	public User findSingleUser(Long id) {
+
+		return userRepository.findById(id).get();
+	}
 }
